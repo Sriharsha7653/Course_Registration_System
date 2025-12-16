@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Registration</title>
+    <style>
+        body {
+            background-color: black;
+            text-align: center;
+        }
+
+        form {
+            margin: auto;
+            padding: 20px;
+            width: 400px;
+            background-color: #fff;
+        }
+
+        input,
+        select,
+        button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            background-color: #af4c82;
+            color: white;
+            font-weight: bold;
+            font-size: medium;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #104212;
+        }
+
+        h1:hover {
+            color: #2bff00a2 !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 style="color: #0736df;">Register a Course</h1>
+    <form action="http://localhost:8080/course/register" method="post">
+        <Label for="name">Enter your Name</Label><br>
+        <input type="text" name="name"><br>
+
+        <Label for="email">Enter your Email-id</Label><br>
+        <input type="email" name="emailid"><br>
+
+        <label for="course">Choose a Course</label>
+        <select name="coursename" id="course">
+
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <Script type="text/javascript">
+        window.onload = function () {
+            getCourse();
+        };
+    </Script>
+
+</body>
+
+</html>
