@@ -2,6 +2,8 @@ package com.example.Course_Registration_System.Service;
 
 import com.example.Course_Registration_System.Model.Course;
 import com.example.Course_Registration_System.Model.CourseRegistry;
+import com.example.Course_Registration_System.Model.Users;
+import com.example.Course_Registration_System.Repository.AdminRepo;
 import com.example.Course_Registration_System.Repository.CourseRegistryRepository;
 import com.example.Course_Registration_System.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class CourseService {
     @Autowired
     CourseRegistryRepository courseregistryrepo;
 
+    @Autowired
+    AdminRepo adminRepo;
     public List<Course> availableCourses() {
         return repo.findAll();
     }
@@ -33,8 +37,12 @@ public class CourseService {
     }
 
 
-    public void addCourse(String courseId, String courseName, String trainer, int durationInWeeks) {
+     public void addCourse(String courseId, String courseName, String trainer, int durationInWeeks) {
         Course course = new Course(courseId, courseName, trainer, durationInWeeks);
         repo.save(course);
+    }
+
+    public List<Users> admin() {
+        return adminRepo.findAll();
     }
 }
