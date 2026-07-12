@@ -28,27 +28,27 @@ import java.util.List;
 public class SecurityConfiguration {
     @Autowired
     UserDetailsService userDetailsService;
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        //Disable Csrf
-        http.csrf(Customizer->Customizer.disable());
-        //authenticate every request
-        http.authorizeHttpRequests(Request->Request
-                .requestMatchers("/admin/**").hasRole("ADMIN")
 
-                .anyRequest().authenticated());
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        //Disable Csrf
+        http.csrf(Customizer -> Customizer.disable());
+        //authenticate every request
+        http.authorizeHttpRequests(Request ->
+                Request.requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll());
         //login page Generation
         //http.formLogin(Customizer.withDefaults());
         http.httpBasic(Customizer.withDefaults());
         //Creating a stateless session id
-     //   http.sessionManagement(Session->Session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        //   http.sessionManagement(Session->Session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 
-        @Bean
-        public AuthenticationProvider authenticationProvider(){
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
         return provider;
-        }
+    }
 }
